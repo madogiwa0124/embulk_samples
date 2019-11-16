@@ -1,0 +1,26 @@
+embulk:
+  build: ./docker/embulk
+  volumes:
+    - ./embulk:/work/embulk
+  links:
+    - mysql
+    - postgres
+mysql:
+  image: mysql
+  ports:
+    - 3306
+  volumes:
+    - ./db/mysql_data:/var/lib/mysql
+    - ./mysql/confd:/etc/mysql/conf.d
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=app
+postgres:
+  image: postgres
+  ports:
+    - 5432
+  volumes:
+    - ./db/postgres_data:/var/lib/postgresql/data
+  environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres

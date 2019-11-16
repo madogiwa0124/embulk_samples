@@ -1,0 +1,32 @@
+exec:
+  min_output_tasks: 1
+in:
+  type: file
+  path_prefix: '/work/embulk/inputs/files/sample.csv'
+  parser:
+    charset: UTF-8
+    newline: LF
+    type: csv
+    delimiter: ','
+    quote: '"'
+    escape: '"'
+    null_string: "NULL"
+    trim_if_not_quoted: false
+    skip_header_lines: 1
+    allow_extra_columns: false
+    allow_optional_columns: false
+    default_timezone: 'Asia/Tokyo'
+    columns:
+    - {name: id, type: long}
+    - {name: account, type: string}
+    - {name: time, type: string}
+    - {name: purchase, type: string}
+    - {name: comment, type: string}
+out:
+  type: mysql
+  host: mysql
+  user: root
+  password: root
+  database: app
+  table: samples
+  mode: insert

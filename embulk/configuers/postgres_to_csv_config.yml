@@ -1,0 +1,27 @@
+exec:
+  min_output_tasks: 1
+in:
+  type: postgresql
+  host: postgres
+  user: postgres
+  password: postgres
+  database: postgres
+  query: |
+    SELECT
+      id,
+      account,
+      time,
+      purchase,
+      comment
+    FROM samples
+out:
+  type: file
+  path_prefix: '/work/embulk/outputs/postgres_to_samples.csv'
+  file_ext: csv
+  formatter:
+    type: csv
+    charset: UTF-8
+    delimiter: ','
+    newline: CRLF
+    quote: '"'
+    escape: '\'

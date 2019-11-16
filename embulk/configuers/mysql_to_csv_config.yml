@@ -1,0 +1,27 @@
+exec:
+  min_output_tasks: 1
+in:
+  type: mysql
+  host: mysql
+  user: root
+  password: root
+  database: app
+  query: |
+    SELECT
+      id,
+      account,
+      time,
+      purchase,
+      comment
+    FROM samples
+out:
+  type: file
+  path_prefix: '/work/embulk/outputs/mysql_to_samples.csv'
+  file_ext: csv
+  formatter:
+    type: csv
+    charset: UTF-8
+    delimiter: ','
+    newline: CRLF
+    quote: '"'
+    escape: '\'
